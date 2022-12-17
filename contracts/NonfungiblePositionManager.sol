@@ -125,6 +125,7 @@ contract NonfungiblePositionManager is
     }
 
     /// @inheritdoc INonfungiblePositionManager
+    /// @dev 添加流动性
     function mint(MintParams calldata params)
         external
         payable
@@ -152,7 +153,7 @@ contract NonfungiblePositionManager is
                 amount1Min: params.amount1Min
             })
         );
-
+        // 铸造流动性nft给用户
         _mint(params.recipient, (tokenId = _nextId++));
 
         bytes32 positionKey = PositionKey.compute(address(this), params.tickLower, params.tickUpper);
@@ -163,7 +164,7 @@ contract NonfungiblePositionManager is
             address(pool),
             PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee})
         );
-
+        // 记录position信息，把用户提供的流动性信息保存下来
         _positions[tokenId] = Position({
             nonce: 0,
             operator: address(0),

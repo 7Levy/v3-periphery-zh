@@ -24,11 +24,11 @@ interface ISwapRouter is IUniswapV3SwapCallback {
     function exactInputSingle(ExactInputSingleParams calldata params) external payable returns (uint256 amountOut);
 
     struct ExactInputParams {
-        bytes path;
-        address recipient;
-        uint256 deadline;
-        uint256 amountIn;
-        uint256 amountOutMinimum;
+        bytes path; // 路径
+        address recipient; // 接收人
+        uint256 deadline; // 截止时间
+        uint256 amountIn; // 输入数量
+        uint256 amountOutMinimum; // 最小输出数量
     }
 
     /// @notice Swaps `amountIn` of one token for as much as possible of another along the specified path
